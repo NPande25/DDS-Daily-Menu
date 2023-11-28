@@ -63,10 +63,3 @@ def get_menu():
         print(f"Error: {response.status_code}, {response.text}")
 
         return [], []
-
-
-l, d = get_menu()
-print("Lunch: ")
-print(l)
-print("Dinner: ")
-print(d)
