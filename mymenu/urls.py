@@ -20,5 +20,5 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('menu.urls')),
+    path('', include('menu.urls')), # to get urls file from inside menu app
 ]
