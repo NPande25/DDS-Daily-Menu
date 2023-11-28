@@ -1,0 +1,18 @@
+{
+    "name": "DDS Daily Menu",
+    "version": "1.0.0",
+    "author": "nikhil.a.pande@gmail.com",
+    "description": "Shows you the daily DDS menu on your chrome browser",
+    "manifest_version": 3,
+    "host_permissions": [
+        "http://*/*",
+        "https://*/*"
+    ],
+    "icons": {
+        "128": "images/logo128.png"
+    },
+    "action": {
+        "default_popup": "menu/templates/menu/index.html",
+        "default_title": "DDS Daily Menu"
+    }
+}
