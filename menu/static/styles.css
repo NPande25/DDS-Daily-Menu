@@ -7,6 +7,21 @@ body {
     background-color: #f4f4f4;
 }
 
+hr {
+    margin: 10px 0; /* Add some margin to the hr for spacing */
+    border: none;
+    border-top: 1px solid #ccc; /* Specify the color of the hr */
+}
+
+h2 {
+    padding-left: 5px;
+}
+
+h3 {
+    padding-left: 10px;
+    font-size: 1.25em;
+}
+
 .header-container {
     background-color: #00693E;
     color: #fff;
@@ -19,7 +34,6 @@ body {
 }
 
 .menu-title {
-    /* color: #00693E; */
     color: "white"
 }
 
@@ -27,17 +41,69 @@ body {
     color: #333;
 }
 
-.menu-list {
-    list-style-type: disc;
+.menu-section {
+    display: flex;
+    flex-direction: column;
 }
 
-.menu-list li {
+.menu-list{
+    list-style-type: none;
+}
+
+.menu-item {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px;
     margin-bottom: 10px;
+    width: 300px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
-/* .load {
-    list-style-type: disc;
-    padding: 0;
+.menu-item h4 {
+    color: #333;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.menu-item p {
+    color: #666;
+    margin: 0;
+}
+
+.menu-section h2 {
+    color: #333;
+}
+
+.tabs {
+    display: flex;
+    width: 100%;
+    background-color: #00693E;
+}
+
+/* Add these styles for the tab buttons */
+.tab {
+    flex: 1;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+    outline: none;
+}
+
+/* Add these styles to highlight the active tab */
+.tab.active {
+    background-color: #00693E; /* Use a different color for the active tab */
+    color: white; /* Set text color to white for better visibility */
+}
+
+.tab:hover {
+    background-color: #00693E;
+}
+
+/* .menu-section {
+    display: none;
 } */
 
 .footer-container {

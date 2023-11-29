@@ -1,3 +1,4 @@
+<!--index.html-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,23 +20,45 @@
     </header>
 
     <main>
-        <section>
-            <h2 class="section-title">Ma Thayer's</h2>
-            <div id="lunch-menu">
-                <h3 class="meal-title">Lunch</h3>
-                <ol id="lunch-items" class="menu-list">
-                    <li class="load">items loading...</li>
-                    <!-- Lunch menu items will be dynamically inserted here -->
-                </ol>
+        <section class="menu-section">
+            <!-- Tabs for Ma Thayer's and Collis -->
+            <div class="tabs">
+                <button class="tab active" id="ma-thayers-tab" data-tab="ma-thayers">Ma Thayer's</button>
+                <button class="tab" id="collis-tab" data-tab="collis">Collis</button>
             </div>
-            <hr>
-            <div id="dinner-menu">
-                <h3 class="meal-title">Dinner</h3>
-                <ol id="dinner-items" class="menu-list">
-                    <li>items loading...</li>
-                    <!-- Dinner menu items will be dynamically inserted here -->
-                </ol>
+
+            <!-- Content for Ma Thayer's tab -->
+            <div id="ma-thayers-content">
+                <!-- <h2 class="section-title">Ma Thayer's</h2> -->
+                <div id="lunch-menu">
+                    <h3 class="meal-title">Lunch</h3>
+                    <ul id="lunch-items" class="menu-list">
+                        <li>items loading...</li>
+                        <!-- lunch items will be dynamically inserted -->
+                    </ul>
+                </div>
+                <hr>
+                <div id="dinner-menu">
+                    <h3 class="meal-title">Dinner</h3>
+                    <ul id="dinner-items" class="menu-list">
+                        <li>items loading...</li>
+                        <!-- dinner items will be dynamically inserted -->
+                    </ul>
+                </div>
             </div>
+
+            <!-- Content for Collis tab (initially empty) -->
+            <div id="collis-content" style="display: none;">
+                <!-- <h2 class="section-title">Collis</h2> -->
+                <div id="collis-special">
+                    <h3 class="meal-title">Collis Special</h3>
+                    <ul id="collis-special-items" class="menu-list">
+                        <li>items loading...</li>
+                    </ul>
+                </div>
+                <p>Content for Collis goes here...</p>
+            </div>
+
         </section>
     </main>
 
