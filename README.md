@@ -6,6 +6,6 @@ Fully functional chrome extension to show the daily DDS Menu, including specials
 * Dynamically inserts menu data into the template with Javascript
 
 Interface:
-![image](files://C:/Users/nikhilpande/Desktop/dds-menu-interface.png)
+![image](images/dds-menu-interface.png)
 
 More features to come...!
