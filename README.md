@@ -5,4 +5,7 @@ Fully functional chrome extension to show the daily DDS Menu, including specials
 * Implements a Django backend server to fetch scraped data by the Python scripts
 * Dynamically inserts menu data into the template with Javascript
 
+Interface:
+![image](files://C:/Users/nikhilpande/Desktop/dds-menu-interface.png)
+
 More features to come...!
