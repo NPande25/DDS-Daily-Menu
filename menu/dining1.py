@@ -1,16 +1,26 @@
 import json
 import requests
 import datetime
+import pytz
 
 
 def get_menu():
-    # get today's date
-    year = datetime.date.today().year
-    month = datetime.date.today().month
-    day = datetime.date.today().day
+    # # get today's date
+    # year = datetime.date.today().year
+    # month = datetime.date.today().month
+    # day = datetime.date.today().day
+
+    local_timezone = pytz.timezone('EST')  # Replace 'Your_Local_Timezone' with your actual time zone
+    today = datetime.datetime.now(local_timezone).date()
+
+    # print(today)
 
     # build url
-    url = f'https://menu.dartmouth.edu/menuapi/mealitems?dates={year}{month:02d}{day:02d}'
+    url = f'https://menu.dartmouth.edu/menuapi/mealitems?dates={today.year}{today.month:02d}{today.day:02d}'
+
+    # print(month)
+    # print(day)
+    print(url)
 
     # make request to the API
     response = requests.get(url)
@@ -63,3 +73,6 @@ def get_menu():
         print(f"Error: {response.status_code}, {response.text}")
 
         return [], []
+
+
+print(get_menu())
