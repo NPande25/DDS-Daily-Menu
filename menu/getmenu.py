@@ -1,4 +1,3 @@
-import json
 import requests
 import datetime
 import pytz
@@ -8,9 +7,11 @@ def get_menu():
 
     local_timezone = pytz.timezone('EST')  # Replace 'Your_Local_Timezone' with your actual time zone
     today = datetime.datetime.now(local_timezone).date()
+    today_format = f"{today.year}{today.month:02d}{today.day:02d}"
 
     # build url
-    url = f'https://menu.dartmouth.edu/menuapi/mealitems?dates={today.year}{today.month:02d}{today.day:02d}'
+    # url = f'https://menu.dartmouth.edu/menuapi/mealitems?dates={today_format}'
+    url = 'https://menu.dartmouth.edu/menuapi/mealitems?dates=20231117'
 
     # make request to the API
     response = requests.get(url)
@@ -26,6 +27,7 @@ def get_menu():
         dinner = []
         collis_spec = []
         collis_soup = []
+        hop_spec = []
 
         # extract information about each menu item
         for meal_item in data['mealItems']:
@@ -33,11 +35,12 @@ def get_menu():
             item_name = meal_item['itemName']
             main_location_label = meal_item['mainLocationLabel']
             datesAvailable = meal_item['datesAvailable']
-            subLocation = datesAvailable[0]['menus'][0]['subLocation']
             recipeCategory = meal_item['recipeCategory']
 
-            # get periods
-            period = datesAvailable[0]['menus'][0]['mealPeriod']
+            # get info from datesAvailable if it's a list (sometimes it isn't)
+            if type(datesAvailable) is list:
+                subLocation = datesAvailable[0]['menus'][0]['subLocation']
+                period = datesAvailable[0]['menus'][0]['mealPeriod']
 
             # Print or process the extracted information as needed
             if main_location_label == "53 Commons" and \
@@ -57,7 +60,13 @@ def get_menu():
                 if "Entrees" in recipeCategory:
                     collis_spec.append(item_name)
 
-        menu_dict = {'lunch':lunch, 'dinner':dinner, 'collis_soup':collis_soup, 'collis_spec':collis_spec}
+            if main_location_label == "Courtyard Caf\u00e9" and \
+                datesAvailable and \
+                len(datesAvailable) == 1:
+                hop_spec.append(item_name)
+
+
+        menu_dict = {'lunch':lunch, 'dinner':dinner, 'collis_soup':collis_soup, 'collis_spec':collis_spec, 'hop_spec':hop_spec}
 
         # Replace empty lists with "None today"
         for key, value in menu_dict.items():

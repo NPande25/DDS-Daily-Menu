@@ -11,7 +11,7 @@ async function updateMenu() {
 
         const data = await response.json();
 
-        updateHTML(data['lunch'], data['dinner'], data['collis_spec'], data['collis_soup']);
+        updateHTML(data['lunch'], data['dinner'], data['collis_spec'], data['collis_soup'], data['hop_spec']);
     } catch (error) {
         console.error('Error fetching menu:', error);
     }
@@ -31,17 +31,19 @@ function createMenuItem(itemName) {
 }
 
 // Function to update the HTML content
-function updateHTML(lunchItems, dinnerItems, collisSpecItems, collisSoupItems) {
+function updateHTML(lunchItems, dinnerItems, collisSpecItems, collisSoupItems, hopSpecItems) {
     const lunchList = document.getElementById('lunch-items');
     const dinnerList = document.getElementById('dinner-items');
     const collisSpecList = document.getElementById('collis-special-items');
     const collisSoupList = document.getElementById('collis-soup-items');
+    const hopSpecList = document.getElementById('hop-special-items');
 
     // Clear existing items
     lunchList.innerHTML = '';
     dinnerList.innerHTML = '';
     collisSpecList.innerHTML = '';
     collisSoupList.innerHTML = '';
+    hopSpecList.innerHTML = '';
 
     // Populate the lists with the new items
     lunchItems.forEach(item => {
@@ -64,12 +66,17 @@ function updateHTML(lunchItems, dinnerItems, collisSpecItems, collisSoupItems) {
         collisSoupList.appendChild(listItem);
     })
 
+    hopSpecItems.forEach(item => {
+        const listItem = createMenuItem(item);
+        hopSpecList.appendChild(listItem);
+    })
+
 
 }
 
 // Function to switch between tabs
 function showTab(tabName) {
-    const tabs = ['ma-thayers', 'collis'];
+    const tabs = ['ma-thayers', 'collis', 'hop'];
 
     tabs.forEach(tab => {
         const tabContent = document.getElementById(`${tab}-content`);
@@ -89,6 +96,7 @@ function showTab(tabName) {
 document.addEventListener('DOMContentLoaded', function () {
     const maThayersTab = document.getElementById('ma-thayers-tab');
     const collisTab = document.getElementById('collis-tab');
+    const hopTab = document.getElementById('hop-tab');
 
     maThayersTab.addEventListener('click', function () {
         showTab('ma-thayers');
@@ -97,6 +105,10 @@ document.addEventListener('DOMContentLoaded', function () {
     collisTab.addEventListener('click', function () {
         showTab('collis');
     });
+    
+    hopTab.addEventListener('click', function () {
+        showTab('hop');
+    })
 
     // Set the default active tab when the page loads
     showTab('ma-thayers');
