@@ -11,7 +11,7 @@ async function updateMenu() {
 
         const data = await response.json();
 
-        updateHTML(data.lunch, data.dinner);
+        updateHTML(data['lunch'], data['dinner'], data['collis_spec'], data['collis_soup']);
     } catch (error) {
         console.error('Error fetching menu:', error);
     }
@@ -31,13 +31,17 @@ function createMenuItem(itemName) {
 }
 
 // Function to update the HTML content
-function updateHTML(lunchItems, dinnerItems) {
+function updateHTML(lunchItems, dinnerItems, collisSpecItems, collisSoupItems) {
     const lunchList = document.getElementById('lunch-items');
     const dinnerList = document.getElementById('dinner-items');
+    const collisSpecList = document.getElementById('collis-special-items');
+    const collisSoupList = document.getElementById('collis-soup-items');
 
     // Clear existing items
     lunchList.innerHTML = '';
     dinnerList.innerHTML = '';
+    collisSpecList.innerHTML = '';
+    collisSoupList.innerHTML = '';
 
     // Populate the lists with the new items
     lunchItems.forEach(item => {
@@ -49,6 +53,18 @@ function updateHTML(lunchItems, dinnerItems) {
         const listItem = createMenuItem(item);
         dinnerList.appendChild(listItem);
     });
+
+    collisSpecItems.forEach(item => {
+        const listItem = createMenuItem(item);
+        collisSpecList.appendChild(listItem);
+    })
+
+    collisSoupItems.forEach(item => {
+        const listItem = createMenuItem(item);
+        collisSoupList.appendChild(listItem);
+    })
+
+
 }
 
 // Function to switch between tabs
@@ -81,6 +97,9 @@ document.addEventListener('DOMContentLoaded', function () {
     collisTab.addEventListener('click', function () {
         showTab('collis');
     });
+
+    // Set the default active tab when the page loads
+    showTab('ma-thayers');
 });
 
 // Call the updateMenu function when the page loads
