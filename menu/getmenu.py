@@ -9,11 +9,8 @@ def get_menu():
     local_timezone = pytz.timezone('EST')  # Replace 'Your_Local_Timezone' with your actual time zone
     today = datetime.datetime.now(local_timezone).date()
 
-    # print(today)
-
     # build url
     url = f'https://menu.dartmouth.edu/menuapi/mealitems?dates={today.year}{today.month:02d}{today.day:02d}'
-    # url = 'https://menu.dartmouth.edu/menuapi/mealitems?dates=20231115'
 
     # make request to the API
     response = requests.get(url)
@@ -35,8 +32,6 @@ def get_menu():
 
             item_name = meal_item['itemName']
             main_location_label = meal_item['mainLocationLabel']
-            menu_category = meal_item['menuCategory']
-            nutrients = meal_item.get('nutrients', [])
             datesAvailable = meal_item['datesAvailable']
             subLocation = datesAvailable[0]['menus'][0]['subLocation']
             recipeCategory = meal_item['recipeCategory']
