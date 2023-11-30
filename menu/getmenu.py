@@ -10,8 +10,7 @@ def get_menu():
     today_format = f"{today.year}{today.month:02d}{today.day:02d}"
 
     # build url
-    # url = f'https://menu.dartmouth.edu/menuapi/mealitems?dates={today_format}'
-    url = 'https://menu.dartmouth.edu/menuapi/mealitems?dates=20231117'
+    url = f'https://menu.dartmouth.edu/menuapi/mealitems?dates={today_format}'
 
     # make request to the API
     response = requests.get(url)
