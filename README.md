@@ -5,4 +5,6 @@ Fully functional chrome extension to show the daily DDS Menu, including specials
 * Implements a Django backend server to fetch scraped data by the Python scripts
 * Dynamically inserts menu data into the template with Javascript
 
+This Chrome app streamlines access to Dartmouth menu data to enable more effective and efficient dining decisions during the day.
+
 ![image](images/dds-menu-interface-small.png)
