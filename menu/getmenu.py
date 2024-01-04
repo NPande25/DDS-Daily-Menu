@@ -5,7 +5,7 @@ import pytz
 
 def get_menu():
 
-    local_timezone = pytz.timezone('EST')  # Replace 'Your_Local_Timezone' with your actual time zone
+    local_timezone = pytz.timezone('EST')  # use python timezone library to ensure eastern time
     today = datetime.datetime.now(local_timezone).date()
     today_format = f"{today.year}{today.month:02d}{today.day:02d}"
 
@@ -35,16 +35,21 @@ def get_menu():
             main_location_label = meal_item['mainLocationLabel']
             datesAvailable = meal_item['datesAvailable']
             recipeCategory = meal_item['recipeCategory']
+            ingredients = meal_item['ingredients']
 
             # get info from datesAvailable if it's a list (sometimes it isn't)
-            if type(datesAvailable) is list:
+            if type(datesAvailable) is list and \
+                len(datesAvailable) > 0:
                 subLocation = datesAvailable[0]['menus'][0]['subLocation']
                 period = datesAvailable[0]['menus'][0]['mealPeriod']
 
             # Print or process the extracted information as needed
             if main_location_label == "53 Commons" and \
                     subLocation == "Ma Thayer's" and \
-                    period in ["Dinner", "Lunch"]:
+                    period in ["Dinner", "Lunch"] and \
+                    "Menu Header" not in recipeCategory:
+                
+                
                 
                 if period == "Lunch":
                     lunch.append(item_name)
@@ -52,7 +57,10 @@ def get_menu():
                     dinner.append(item_name)
 
             # pull collis menu data
-            if main_location_label == "Collis Caf\u00e9":
+            if main_location_label == "Collis Caf\u00e9" and \
+                subLocation == "Specials" and \
+                len(datesAvailable) < 3 and \
+                "Sandwiches" not in recipeCategory:
                 if "Soup" in recipeCategory:
                     collis_soup.append(item_name)
                 
@@ -61,7 +69,7 @@ def get_menu():
 
             if main_location_label == "Courtyard Caf\u00e9" and \
                 datesAvailable and \
-                len(datesAvailable) == 1:
+                len(datesAvailable) < 5:
                 hop_spec.append(item_name)
 
 
@@ -79,6 +87,5 @@ def get_menu():
         print(f"Error: {response.status_code}, {response.text}")
 
         return {}
-
-
+    
 print(get_menu())
