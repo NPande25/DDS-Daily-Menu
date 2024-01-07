@@ -91,4 +91,5 @@ def get_menu():
         print(f"Error: {response.status_code}, {response.text}")
         return {}
 
-print(get_menu())
+if __name__ == "__main__":
+	print(get_menu())
