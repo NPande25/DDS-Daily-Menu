@@ -4,8 +4,9 @@ import pytz
 import json
 import os
 
-
 CACHE_FILE_PATH = 'api_cache.json'
+local_timezone = pytz.timezone('EST')
+
 
 def get_menu():
     # Check if there's a cached response
@@ -13,12 +14,11 @@ def get_menu():
         with open(CACHE_FILE_PATH, 'r') as cache_file:
             cached_data = json.load(cache_file)
             # Check if the cached data is still valid (e.g., not too old)
-            if datetime.datetime.now().strftime("%Y-%m-%d") in cached_data['dates']:
+            if datetime.datetime.now(local_timezone).strftime("%Y-%m-%d") in cached_data['dates']:
                 return process_menu_data(cached_data)
 
                 
     # If no valid cache, fetch data from the API
-    local_timezone = pytz.timezone('EST')
     today = datetime.datetime.now(local_timezone).date()
     today_format = f"{today.year}{today.month:02d}{today.day:02d}"
     url = f'https://menu.dartmouth.edu/menuapi/mealitems?dates={today_format}'
@@ -55,7 +55,7 @@ def process_menu_data(data):
             sub_location = dates_available[0]['menus'][0]['subLocation']
             date = dates_available[0]['menus']
             for item in dates_available:
-                if item['date'] == datetime.datetime.now().strftime("%Y%m%d"):
+                if item['date'] == datetime.datetime.now(local_timezone).strftime("%Y%m%d"):
                     period = item['menus'][0]['mealPeriod']
 
         # Check conditions once and store the result

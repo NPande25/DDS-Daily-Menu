@@ -6,6 +6,7 @@ from .getmenu import get_menu
 # connects front/back ends by pulling function from getmenu.py
 def menu_view(request):
     menu_data = get_menu()
+    print("in menu view:", menu_data)
     return JsonResponse(menu_data)
 
 
